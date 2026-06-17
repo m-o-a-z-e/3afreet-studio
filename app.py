@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import litellm
 import json
+import os
+import re
 
 from main import run_agency, MODEL_NAME
 
@@ -26,6 +28,33 @@ class ChatRequest(BaseModel):
 class IdeaRequest(BaseModel):
     chat_summary: str
 
+# ----------------------------------------------------
+# 1. API Keys Collection
+# ----------------------------------------------------
+available_keys = [
+    os.getenv("GROQ_API_KEY_1"),
+    os.getenv("GROQ_API_KEY_2")
+]
+
+valid_keys = [key for key in available_keys if key]
+
+if not valid_keys and os.getenv("GROQ_API_KEY"):
+    valid_keys.append(os.getenv("GROQ_API_KEY"))
+
+# ----------------------------------------------------
+# 2. Error Handler
+# ----------------------------------------------------
+def get_3afreet_error(e):
+    error_str = str(e).lower()
+    if "429" in error_str or "rate limit" in error_str or "quota" in error_str:
+        match = re.search(r'try again in (.*?)(?:\.|$)', str(e), re.IGNORECASE)
+        if match:
+            return f"3afreet is out of mana! All portals are resting. Wake me up in {match.group(1)}."
+        else:
+            return "3afreet is out of mana! I've burned through all my magic limits across all accounts. Catch you tomorrow!"
+    return "The portal to the void just glitched. Give me a second to reconnect the magic."
+
+
 @app.post("/chat")
 def chat_endpoint(request: ChatRequest):
     system_prompt = """You are '3afreet', a brilliant, slightly chaotic, but highly strategic Creative Director.
@@ -46,16 +75,25 @@ def chat_endpoint(request: ChatRequest):
         
     messages.append({"role": "user", "content": request.message})
     
-    try:
-        response = litellm.completion(model=MODEL_NAME, messages=messages, temperature=0.8)
-        return {"reply": response.choices[0].message.content}
-    except Exception as e:
-        return {"reply": "Connection failed. Please check the backend server."}
+    last_error = None
+    for key in valid_keys:
+        try:
+            os.environ["GROQ_API_KEY"] = key
+            response = litellm.completion(model=MODEL_NAME, messages=messages, temperature=0.8)
+            return {"reply": response.choices[0].message.content}
+        except Exception as e:
+            error_str = str(e).lower()
+            if "429" in error_str or "rate limit" in error_str:
+                last_error = e
+                continue 
+            else:
+                return {"reply": get_3afreet_error(e)}
+                
+    return {"reply": get_3afreet_error(last_error)}
 
 @app.post("/generate-ideas")
 def generate_ideas(request: IdeaRequest):
     print("\n[Brainstorming 4 Creative Themes...]")
-    
     prompt = f"""
     Based on this chat history: {request.chat_summary}
     
@@ -96,28 +134,48 @@ def generate_ideas(request: IdeaRequest):
     CRITICAL LANGUAGE RULE: Write the JSON values in clear, high-end, powerful Egyptian Arabic that matches a professional agency standard. Avoid any broken text or random symbols.
     """
     
-    try:
-        response = litellm.completion(
-            model=MODEL_NAME,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.85
-        )
-        raw_text = response.choices[0].message.content
-        start_idx = raw_text.find('[')
-        end_idx = raw_text.rfind(']')
-        clean_json = raw_text[start_idx:end_idx+1] if start_idx != -1 else raw_text
-        
-        ideas = json.loads(clean_json, strict=False)
-        return {"status": "success", "ideas": ideas}
-    except Exception as e:
-        print(f"Error generating ideas: {e}")
-        return {"status": "error", "message": "Failed to parse ideas JSON."}
+    last_error = None
+    for key in valid_keys:
+        try:
+            os.environ["GROQ_API_KEY"] = key
+            response = litellm.completion(
+                model=MODEL_NAME,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.85
+            )
+            raw_text = response.choices[0].message.content
+            start_idx = raw_text.find('[')
+            end_idx = raw_text.rfind(']')
+            clean_json = raw_text[start_idx:end_idx+1] if start_idx != -1 else raw_text
+            
+            ideas = json.loads(clean_json, strict=False)
+            return {"status": "success", "ideas": ideas}
+        except Exception as e:
+            error_str = str(e).lower()
+            if "429" in error_str or "rate limit" in error_str:
+                last_error = e
+                continue
+            else:
+                return {"status": "error", "message": get_3afreet_error(e)}
+                
+    return {"status": "error", "message": get_3afreet_error(last_error)}
 
 @app.post("/generate-campaign")
 def generate_campaign(request: CampaignRequest):
     print("\n[WAKING UP CREWAI FOR CMO-LEVEL EXECUTION...]")
-    try:
-        report = run_agency(request.chat_summary)
-        return {"status": "success", "campaign_report": report}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+    last_error = None
+    for key in valid_keys:
+        try:
+            os.environ["GROQ_API_KEY"] = key 
+            report = run_agency(request.chat_summary)
+            return {"status": "success", "campaign_report": report}
+        except Exception as e:
+            error_str = str(e).lower()
+            if "429" in error_str or "rate limit" in error_str:
+                print(f"[Warning] CrewAI hit a rate limit. Switching key...")
+                last_error = e
+                continue
+            else:
+                return {"status": "error", "message": get_3afreet_error(e)}
+                
+    return {"status": "error", "message": get_3afreet_error(last_error)}

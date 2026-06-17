@@ -82,7 +82,7 @@ function Studio() {
     setInput("");
     setIsTyping(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/chat", {
+      const response = await fetch("https://m-o-a-z-3afreet-api.hf.space/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userMsg, history: messages })
@@ -100,7 +100,7 @@ function Studio() {
     setCampaignData(null); 
     setMessages(prev => [...prev, { sender: 'user', text: 'Give me the killer angles.' }]);
     try {
-      const response = await fetch("http://127.0.0.1:8000/generate-ideas", {
+      const response = await fetch("https://m-o-a-z-3afreet-api.hf.space/generate-ideas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_summary: messages.map(m => `${m.sender}: ${m.text}`).join('\n') })
@@ -121,7 +121,7 @@ function Studio() {
     setIdeasData(null);
     setMessages(prev => [...prev, { sender: 'user', text: 'Do the heavy lifting.' }]);
     try {
-      const response = await fetch("http://127.0.0.1:8000/generate-campaign", {
+      const response = await fetch("https://m-o-a-z-3afreet-api.hf.space/generate-campaign", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_summary: messages.map(m => `${m.sender}: ${m.text}`).join('\n') })
