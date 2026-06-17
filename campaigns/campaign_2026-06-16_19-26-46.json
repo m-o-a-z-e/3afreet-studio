@@ -1,0 +1,44 @@
+[
+    {
+        "day": "Day 1 - 10:00 AM",
+        "format": "Reel/TikTok Video",
+        "content": "[Visual]: Fast zoom into a glowing screen.\n[Audio]: Stop scrolling! Here is the secret...\n\nCaption: Join us now! #Event",
+        "prompt": "A person sleeping peacefully, with a soft focus effect, shot on a 50mm lens, cinematic studio lighting with subtle color gel lights, clean negative space on the left for text --ar 16:9 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 2 - 10:00 AM",
+        "format": "Carousel Post",
+        "content": "Did you know that sleep is the ultimate superpower? 🦸‍♀️ It enhances cognitive function, memory consolidation, and physical recovery. 💪\n\nSleep affects your productivity, decision-making, and overall well-being. 📊 Here are the numbers: [insert statistics].\n\nThe most successful people prioritize sleep. 🙏 Hear from the experts: [insert quotes].",
+        "prompt": "An editorial noir-themed infographic with deep charcoal grey background, soft navy blue accents, and golden yellow highlights, shot on a 35mm lens, natural lighting, minimalist composition --ar 4:5 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 3 - 10:00 AM",
+        "format": "Static Post",
+        "content": "Be one of the first to experience the future of sleep. 🚀 Introducing Nox, the premium smart-ring designed to optimize your sleep and recovery. 💤 Join our exclusive waitlist now and get ready to unlock your full potential. 🔓 Limited spots available! ⏰ #NoxTheShadowAdvantage #ExclusiveAccess #SleepRevolution",
+        "prompt": "A sophisticated minimalistic visual of the Nox smart-ring against a dark, gradient background, with subtle editorial noir-inspired textures and shadows, shot on an 85mm lens, cinematic studio lighting with subtle color gel lights, subject centered, out-of-focus background (bokeh) --ar 4:5 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 4 - 10:00 AM",
+        "format": "Reel/TikTok Video",
+        "content": "[Visual]: A person working late at night, with a dark and gritty tone\n[Audio]: Narrator: \"Hustle culture promises success, but at what cost?\"\n\n[Visual]: A montage of people experiencing burnout, with testimonials and data visualizations\n[Audio]: Narrator: \"Neglecting sleep can lead to decreased performance, burnout, and a host of other problems.\"\n\n[Visual]: A person prioritizing sleep, with a peaceful and serene atmosphere\n[Audio]: Narrator: \"It's time to rethink our approach to success and prioritize our well-being.\"\n\nCaption: The hustle culture promises success, but at what cost? 🚨 Don't let burnout hold you back. 🔥 Prioritize your sleep and unlock your full potential. 💡 #NoxTheShadowAdvantage #SleepIsKey #HustleCulture",
+        "prompt": "A person working late at night, with a dark and gritty tone, shot on a 28mm lens, cinematic studio lighting with subtle color gel lights, subject centered, out-of-focus background (bokeh) --ar 16:9 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 5 - 10:00 AM",
+        "format": "Carousel Post",
+        "content": "Introducing Nox, the premium smart-ring designed to optimize your sleep and recovery. 💡\n\nWith Nox, you can track your sleep patterns, monitor your physical recovery, and receive personalized recommendations for improvement. 📊\n\nBut don't just take our word for it. 🙏 Hear from our satisfied users: [insert testimonials].",
+        "prompt": "An editorial noir-themed visual of the Nox smart-ring, with a deep charcoal grey background and golden yellow accents, shot on a 50mm lens, natural lighting, minimalist composition --ar 4:5 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 6 - 10:00 AM",
+        "format": "Static Image",
+        "content": "Ever wondered how Nox was made? 🤔 Take a sneak peek at our design process and meet the team behind the premium smart-ring. 💡 We're dedicated to creating a product that helps you unlock your full potential. 🔓 #NoxTheShadowAdvantage #BehindTheScenes #DesignProcess",
+        "prompt": "A behind-the-scenes visual of the design team at work, with a deep charcoal grey background and soft navy blue accents, shot on a 35mm lens, cinematic studio lighting with subtle color gel lights, subject centered, out-of-focus background (bokeh) --ar 4:5 --style raw --v 6.0"
+    },
+    {
+        "day": "Day 7 - 10:00 AM",
+        "format": "Reel/TikTok Video",
+        "content": "[Visual]: A countdown timer, with a suspenseful tone\n[Audio]: Narrator: \"The wait is almost over...\"\n\n[Visual]: A montage of the Nox smart-ring, with features and benefits highlighted\n[Audio]: Narrator: \"Get ready to experience the future of sleep with Nox.\"\n\n[Visual]: A shot of the Nox logo, with a call-to-action to join the waitlist\n[Audio]: Narrator: \"Join our exclusive waitlist now and be one of the first to get your hands on Nox.\"\n\nCaption: The wait is almost over! 🚀 Get ready to experience the future of sleep with Nox. 💡 Join our exclusive waitlist now and be one of the first to get your hands on the premium smart-ring. 🔓 #NoxTheShadowAdvantage #CountdownToLaunch #SleepRevolution",
+        "prompt": "A countdown timer, with a suspenseful tone, shot on a 28mm lens, cinematic studio lighting with subtle color gel lights, subject centered, out-of-focus background (bokeh) --ar 16:9 --style raw --v 6.0"
+    }
+]
